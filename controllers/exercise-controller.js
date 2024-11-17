@@ -20,3 +20,24 @@ exports.addExercise = async (req, res) => {
         res.status(500).send("Error adding exercise");
     }
 }
+
+exports.editExercise = async (req, res) => {
+    try {
+        await Exercise.findByIdAndUpdate(req.params.id, req.body);
+        res.status(200).send("Exercise updated");
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send("Error updating exercise");
+    }
+}
+
+exports.deleteExercise = async (req, res) => {
+    try {
+        await Exercise.findByIdAndDelete(req.params.id);
+        res.status(200).send("Exercise deleted");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Error deleting exercise");
+    }
+}

@@ -4,10 +4,16 @@ const router = new Router();
 const {
     getExercises,
     addExercise,
+    editExercise,
+    deleteExercise
 } = require("../controllers/exercise-controller.js");
 
-router.get("/", getExercises);
+router.get("/programs", getExercises);
 
-router.post("/add", addExercise);
+router.post("/programs", addExercise);
+
+router.put("/programs/:id", editExercise);
+
+router.delete("/programs/:id", deleteExercise);
 
 module.exports = router;
