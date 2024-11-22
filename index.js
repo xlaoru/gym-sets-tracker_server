@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://gym-sets-tracker-server-1.onrender.com",
 }));
 
 const PORT = process.env.PORT || 3001;
