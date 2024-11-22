@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: "https://gym-sets-tracker-server-1.onrender.com",
+    origin: "https://gym-sets-tracker.netlify.app",
 }));
 
 const PORT = process.env.PORT || 3001;
