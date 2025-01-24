@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const exerciseRoutes = require("./routes/exercise-route.js");
+const programRoutes = require("./routes/program-route.js");
 
 const app = express();
 
@@ -15,10 +15,10 @@ app.use(cors({
 const PORT = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
-    res.end("Blog-X server is working");
+    res.end("Gym Sets Tracker server is working");
 });
 
-app.use("/api", exerciseRoutes);
+app.use("/api", programRoutes);
 
 mongoose
     .connect(
