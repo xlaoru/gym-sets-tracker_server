@@ -23,10 +23,6 @@ exports.addProgram = async (req, res) => {
 
 exports.editProgram = async (req, res) => {
     try {
-        console.log("req.params.id", req.params.id);
-        console.log("req.body", req.body);
-
-
         const program = await Program.findByIdAndUpdate(req.params.id, req.body);
         await program.save()
 
@@ -41,7 +37,10 @@ exports.editProgram = async (req, res) => {
 exports.deleteProgram = async (req, res) => {
     try {
         const program = await Program.findByIdAndDelete(req.params.id);
-        await program.save()
+
+        if (!program) {
+            return res.status(404).json({ message: "Program not found." });
+        }
 
         res.status(200).json({ program, message: "Program deleted successfully." });
     } catch (error) {
