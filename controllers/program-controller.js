@@ -2,7 +2,7 @@ const Program = require("../models/program.model");
 
 exports.getPrograms = async (req, res) => {
     try {
-        const programs = await Program.find({});
+        const programs = await Program.find({}).sort({ date: -1});
         res.status(200).json({ programs: programs, message: "Programs fetched successfully." });
     } catch (error) {
         console.log(error);
@@ -12,6 +12,11 @@ exports.getPrograms = async (req, res) => {
 
 exports.addProgram = async (req, res) => {
     try {
+        req.body.exercises = req.body.exercises.map(exercise => {
+            const { _id, ...rest } = exercise;
+            return rest;
+        });
+
         const program = new Program(req.body);
         await program.save();
         res.status(201).json({ program, message: "Program created successfully." });
@@ -23,6 +28,11 @@ exports.addProgram = async (req, res) => {
 
 exports.editProgram = async (req, res) => {
     try {
+        req.body.exercises = req.body.exercises.map(exercise => {
+            const { _id, ...rest } = exercise;
+            return rest;
+        });
+
         const program = await Program.findByIdAndUpdate(req.params.id, req.body);
         await program.save()
 
