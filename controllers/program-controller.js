@@ -1,10 +1,22 @@
 const Program = require("../models/program.model");
 
 exports.getPrograms = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
     try {
-        const programs = await Program.find({}).sort({ date: -1 });
+        const total = await Program.countDocuments({});
+
+        const programs = await Program.find({})
+            .sort({ date: -1 })
+            .skip((page - 1) * limit)
+            .limit(limit);
+
         res.status(200).json({
-            programs: programs,
+            programs,
+            total,
+            pages: Math.ceil(total / limit),
+            page,
             message: "Programs fetched successfully.",
         });
     } catch (error) {
