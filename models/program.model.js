@@ -11,7 +11,7 @@ const ExerciseSetSchema = new mongoose.Schema({
     },
 });
 
-const ExerciseSchema = new mongoose.Schema({
+/*const ExerciseSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -22,17 +22,26 @@ const ExerciseSchema = new mongoose.Schema({
     },
 });
 
+const SupersetSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    exercises: {
+        type: [ExerciseSchema],
+        required: true,
+    },
+});*/
+
 const ProgramSchema = new mongoose.Schema({
     dayName: {
         type: String,
         required: true,
     },
-
     exercises: {
-        type: [ExerciseSchema],
+        type: [mongoose.Schema.Types.Mixed],
         required: true,
     },
-
     date: {
         type: Date,
         required: true,
